@@ -23,7 +23,11 @@ class ResumeBuilder:
         self.pdf.setFont(NORMAL, 12)
         self.pdf.setFillColorRGB(0, 0, 0)
         self.pdf.drawString(x, y - 20, email)
-        self.pdf.drawString(x, y - 35, phone)
+        area_code = phone[0:3]
+        three_digits = phone[3:6]
+        four_digits = phone[6:10]
+        phone_number = str("("+area_code+")"+" "+three_digits+"-"+four_digits)
+        self.pdf.drawString(x, y - 35, phone_number)
 
     def section(self, name, x, y, line_start, line_end):
         self.pdf.setFillColorRGB(0, 0, 255)
@@ -57,13 +61,13 @@ class ResumeBuilder:
         self.pdf.setFont(ITALIC, 12)
         self.pdf.drawString(x_right, y, location)
         self.pdf.setFont(ITALIC, 10)
-        self.pdf.drawString(500, y - 15, date)  # y-15 apart from Location
+        self.pdf.drawString(x_right, y - 15, date)  # y-15 apart from Location
         self.pdf.setFont(NORMAL, 10)
 
         spacing = 30
         # y-10 apart
         for b in bullets:
-            self.pdf.drawString(x_left, y - spacing, "- " + b)  # y-30 apart from Company n
+            self.pdf.drawString(x_left, y - spacing, " - " + b)  # y-30 apart from Company n
             spacing += 10
 
     def list_project(self, name, x, y, bullets):
@@ -85,7 +89,7 @@ class ResumeBuilder:
         self.pdf.setFont(ITALIC, 12)
         self.pdf.drawString(x_right, y, location)
         self.pdf.setFont(ITALIC, 10)
-        self.pdf.drawString(500, y - 15, date)  # y-15 apart from Location
+        self.pdf.drawString(x_right, y - 15, date)  # y-15 apart from Location
 
     def save(self):
         self.pdf.save()
