@@ -14,10 +14,13 @@ def main():
     # draw ruler
     # draw_ruler(pdf)
 
-    doc.intro(name=NAME, email=EMAIL, phone=PHONE, x=20, y=770)
+    name = input("enter first and last name ")
+    email = input("enter email ")
+    phone = input("enter phone ")
+    doc.intro(name, email, phone, x=20, y=770)
 
-    skills = ("skill0", "skill1", "skill2")
     # Skills
+    skills = ("skill0", "skill1", "skill2")
     doc.section(name="Skills", x=20, y=675, line_start=80, line_end=550)
 
     # 15 apart for skills
