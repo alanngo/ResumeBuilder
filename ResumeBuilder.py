@@ -84,10 +84,13 @@ class ResumeBuilder:
     def list_edu(self, school, degree, location, date, x_left, x_right, y):
         self.pdf.setFont(NORMAL, 14)
         self.pdf.drawString(x_left, y, school)
+
         self.pdf.setFont(NORMAL, 12)
         self.pdf.drawString(x_left, y - 15, degree)
+
         self.pdf.setFont(ITALIC, 12)
         self.pdf.drawString(x_right, y, location)
+
         self.pdf.setFont(ITALIC, 10)
         self.pdf.drawString(x_right, y - 15, date)  # y-15 apart from Location
 

@@ -78,7 +78,7 @@ def main():
     end = END
     location = city + ", " + state
     date = start + " - " + end
-    doc.list_edu(school, degree, date, location,
+    doc.list_edu(school, degree, location, date,
                  x_left=40,
                  x_right=LOC_POS,
                  y=50)
