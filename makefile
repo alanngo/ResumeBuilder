@@ -1,4 +1,4 @@
 commit:
-	git add $(files)
+	git add .
 	git commit -m "$(m)"
 	git push
