@@ -43,10 +43,12 @@ class ResumeBuilder:
 
     def list_skill(self, skill, skill_values, x_left, x_right, y):
 
+        # skill category
         set_font(self.pdf, NORMAL, 12)
         self.pdf.drawString(x_left, y, skill)
         set_font(self.pdf, LIST_VAL, 8)
 
+        # category values
         values = ""
         cnt = 0
         for s in skill_values:
@@ -61,21 +63,27 @@ class ResumeBuilder:
         set_color(self.pdf, self.category_color)
 
     def list_exp(self, company, job_title, location, date, x_left, x_right, y, bullets):
+
+        # company
         set_font(self.pdf, NORMAL, 14)
         self.pdf.drawString(x_left, y, company)
 
-        set_font(self.pdf, NORMAL, 11)
-        self.pdf.drawString(x_left, y - 15, job_title)  # y-15 apart from Company n
+        # job title
+        set_font(self.pdf, NORMAL, 10)
+        self.pdf.drawString(x_left, y - 10, job_title)  # y-10 apart from Company n
 
+        # location
         set_color(self.pdf, self.header_color)
         set_font(self.pdf, ITALIC, 12)
         self.pdf.drawString(x_right, y, location)
-        set_color(self.pdf, self.category_color)
 
+        # date
+        set_color(self.pdf, self.category_color)
         set_font(self.pdf, ITALIC, 10)
         self.pdf.drawString(x_right, y - 15, date)  # y-15 apart from Location
 
-        spacing = 25
+        # bullets
+        spacing = 20
         set_font(self.pdf, LIST_VAL, 8)
         set_color(self.pdf, self.list_color)
         for b in bullets:  # y-10 apart
