@@ -1,4 +1,8 @@
 BOLD = "Times-Bold"
 ITALIC = "Times-Italic"
 NORMAL = "Times-Roman"
-SKILL_VALUE = "Helvetica"
+LIST_VAL = "Helvetica"
+
+
+def set_font(pdf, font, size):
+    pdf.setFont(font, size)
