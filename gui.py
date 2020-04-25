@@ -7,7 +7,8 @@ attr = ('Name', 'Email', 'Phone Number',
         'Skill0', 'Skill1', 'Skill2', 'Skill3',
         'Company0', 'Job0', 'City0', 'State0', 'Start0', 'End0',
         'Company1', 'Job1', 'City1', 'State1', 'Start1', 'End1',
-        'Company2', 'Job2', 'City2', 'State2', 'Start2', 'End2')
+        'Company2', 'Job2', 'City2', 'State2', 'Start2', 'End2',
+        'Project0', 'Project1', 'Project2')
 FILE_TITLE = "sample_gui.pdf"
 DOC_TITLE = "Sample"
 
@@ -40,12 +41,9 @@ def make_resume(entries):
 
     # 15 apart for skills
     dist = 150  # change to something not too far
-    s0 = entries['Skill0'].get()
-    s1 = entries['Skill1'].get()
-    s2 = entries['Skill2'].get()
-    s3 = entries['Skill3'].get()
-    skill_list = [s0, s1, s2, s3]
-    word_len = [len(s0), len(s1), len(s2), len(s3)]
+
+    skill_list = [entries['Skill0'].get(), entries['Skill1'].get(), entries['Skill2'].get(), entries['Skill3'].get()]
+    word_len = [len(skill_list[0]), len(skill_list[1]), len(skill_list[2]), len(skill_list[3])]
     i = 0
     for skill in skill_list:
         doc.list_skill(skill, skill_values=skills,
@@ -56,50 +54,28 @@ def make_resume(entries):
     # Experience
     doc.section(name="Experience", x=HEADER_POS, y=575, line_start=130, line_end=LINE_END)
 
+    companies = [entries['Company0'].get(), entries['Company1'].get(), entries['Company2'].get()]
+    jobs = [entries['Job0'].get(), entries['Job1'].get(), entries['Job2'].get()]
+    cities = [entries['City0'].get(), entries['City1'].get(), entries['City2'].get()]
+    states = [entries['State0'].get(), entries['State1'].get(), entries['State2'].get()]
+    start = [entries['Start0'].get(), entries['Start1'].get(), entries['Start2'].get()]
+    end = [entries['End0'].get(), entries['End1'].get(), entries['End2'].get()]
+
     # jobs (75 apart from each job)
-    c0 = entries['Company0'].get()
-    c1 = entries['Company1'].get()
-    c2 = entries['Company2'].get()
-    j0 = entries['Job0'].get()
-    j1 = entries['Job1'].get()
-    j2 = entries['Job2'].get()
-    city0 = entries['City0'].get()
-    city1 = entries['City1'].get()
-    city2 = entries['City2'].get()
-    state0 = entries['State0'].get()
-    state1 = entries['State1'].get()
-    state2 = entries['State2'].get()
-    start0 = entries['Start0'].get()
-    start1 = entries['Start1'].get()
-    start2 = entries['Start2'].get()
-    end0 = entries['End0'].get()
-    end1 = entries['End1'].get()
-    end2 = entries['End2'].get()
-
-    location = city0 + ", " + state0
-    date = start0 + " - " + end0
-    doc.list_exp(c0, j0, location, date,
-                 x_left=SUB_HEADER_POS, x_right=LOC_POS, y=LINE_END - (75 * 0),  # 75 apart
-                 bullets=exp)
-
-    location = city1 + ", " + state1
-    date = start1 + " - " + end1
-    doc.list_exp(c1, j1, location, date,
-                 x_left=SUB_HEADER_POS, x_right=LOC_POS, y=LINE_END - (75 * 1),  # 75 apart
-                 bullets=exp)
-
-    location = city2 + ", " + state2
-    date = start2 + " - " + end2
-    doc.list_exp(c2, j2, location, date,
-                 x_left=SUB_HEADER_POS, x_right=LOC_POS, y=LINE_END - (75 * 2),  # 75 apart
-                 bullets=exp)
+    for i in range(0, 3):
+        location = cities[i] + ", " + states[i]
+        date = start[i] + " - " + end[i]
+        doc.list_exp(companies[i], jobs[i], location, date,
+                     x_left=SUB_HEADER_POS, x_right=LOC_POS, y=LINE_END - (75 * i),  # 75 apart
+                     bullets=exp)
 
     proj = ["Lorem ipsum dolor sit amet", "Ut enim ad minim veniam", "Duis aute irure dolor in reprehenderit"]
     # Projects
     doc.section(name="Projects", x=HEADER_POS, y=325, line_start=100, line_end=LINE_END)
+    projects = [entries['Project0'].get(), entries['Project1'].get(), entries['Project2'].get()]
     # 75 apart
     for i in range(3):
-        name = PROJECT
+        name = projects[i]
         doc.list_project(name, x=SUB_HEADER_POS, y=300 - 75 * i, bullets=proj)
 
     # Education
