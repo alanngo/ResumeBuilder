@@ -1,17 +1,16 @@
 from tkinter import *
-from ResumeBuilder import ResumeBuilder
 from Paper import *
 from Color import *
+from ResumeBuilder import ResumeBuilder
 
 attr = ('Name', 'Email', 'Phone Number',
         'Skill0', 'Skill1', 'Skill2', 'Skill3',
-        'Company0', 'Company1', 'Company2',
-        'Job0', 'Job1', 'Job2',
-        'City0', 'City1', 'City2')
+        'Company0', 'Job0', 'City0', 'State0', 'Start0', 'End0',
+        'Company1', 'Job1', 'City1', 'State1', 'Start1', 'End1',
+        'Company2', 'Job2', 'City2', 'State2', 'Start2', 'End2')
 FILE_TITLE = "sample_gui.pdf"
 DOC_TITLE = "Sample"
 
-JOB_TITLE = "CEO"
 CITY = "San Francisco"
 STATE = "California"
 START = "December 2001"
@@ -66,31 +65,31 @@ def make_resume(entries):
     j2 = entries['Job2'].get()
     city0 = entries['City0'].get()
     city1 = entries['City1'].get()
+    city2 = entries['City2'].get()
+    state0 = entries['State0'].get()
+    state1 = entries['State1'].get()
+    state2 = entries['State2'].get()
+    start0 = entries['Start0'].get()
+    start1 = entries['Start1'].get()
+    start2 = entries['Start2'].get()
+    end0 = entries['End0'].get()
+    end1 = entries['End1'].get()
+    end2 = entries['End2'].get()
 
-    state = STATE
-    start = START
-    end = END
-    location = city0 + ", " + state
-    date = start + " - " + end
+    location = city0 + ", " + state0
+    date = start0 + " - " + end0
     doc.list_exp(c0, j0, location, date,
                  x_left=SUB_HEADER_POS, x_right=LOC_POS, y=LINE_END - (75 * 0),  # 75 apart
                  bullets=exp)
 
-    state = STATE
-    start = START
-    end = END
-    location = city1 + ", " + state
-    date = start + " - " + end
+    location = city1 + ", " + state1
+    date = start1 + " - " + end1
     doc.list_exp(c1, j1, location, date,
                  x_left=SUB_HEADER_POS, x_right=LOC_POS, y=LINE_END - (75 * 1),  # 75 apart
                  bullets=exp)
 
-    city2 = entries['City2'].get()
-    state = STATE
-    start = START
-    end = END
-    location = city2 + ", " + state
-    date = start + " - " + end
+    location = city2 + ", " + state2
+    date = start2 + " - " + end2
     doc.list_exp(c2, j2, location, date,
                  x_left=SUB_HEADER_POS, x_right=LOC_POS, y=LINE_END - (75 * 2),  # 75 apart
                  bullets=exp)
@@ -146,7 +145,7 @@ def main():
     root.bind('<Return>', (lambda event, e=None: fetch(e)))
     submit = Button(root, text='Make Resume',
                     command=(lambda e=ents: make_resume(e)))
-    submit.pack(side=LEFT, padx=5, pady=5)
+    submit.pack(side=RIGHT, padx=5, pady=5)
     root.mainloop()
 
 
