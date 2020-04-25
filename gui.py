@@ -6,7 +6,8 @@ from Color import *
 attr = ('Name', 'Email', 'Phone Number',
         'Skill0', 'Skill1', 'Skill2', 'Skill3',
         'Company0', 'Company1', 'Company2',
-        'Job0', 'Job1', 'Job2')
+        'Job0', 'Job1', 'Job2',
+        'City0', 'City1', 'City2')
 FILE_TITLE = "sample_gui.pdf"
 DOC_TITLE = "Sample"
 
@@ -37,25 +38,20 @@ def make_resume(entries):
     # Skills
     doc.section(name="Skills", x=HEADER_POS, y=675, line_start=80, line_end=LINE_END)
     skills = ["Lorem ipsum dolor sit amet", "Ut enim ad minim veniam", "Duis aute irure dolor in reprehenderit"]
+
     # 15 apart for skills
     dist = 150  # change to something not too far
     s0 = entries['Skill0'].get()
     s1 = entries['Skill1'].get()
     s2 = entries['Skill2'].get()
     s3 = entries['Skill3'].get()
+    skill_list = [s0, s1, s2, s3]
     word_len = [len(s0), len(s1), len(s2), len(s3)]
-
-    doc.list_skill(s0, skill_values=skills,
-                   x_left=SUB_HEADER_POS, x_right=max(word_len) + dist, y=650 - (15 * 0))
-
-    doc.list_skill(s1, skill_values=skills,
-                   x_left=SUB_HEADER_POS, x_right=max(word_len) + dist, y=650 - (15 * 1))
-
-    doc.list_skill(s2, skill_values=skills,
-                   x_left=SUB_HEADER_POS, x_right=max(word_len) + dist, y=650 - (15 * 2))
-
-    doc.list_skill(s3, skill_values=skills,
-                   x_left=SUB_HEADER_POS, x_right=max(word_len) + dist, y=650 - (15 * 3))
+    i = 0
+    for skill in skill_list:
+        doc.list_skill(skill, skill_values=skills,
+                       x_left=SUB_HEADER_POS, x_right=max(word_len) + dist, y=650 - (15 * i))
+        i += 1
 
     exp = ["Lorem ipsum dolor sit amet", "Ut enim ad minim veniam", "Duis aute irure dolor in reprehenderit"]
     # Experience
@@ -63,36 +59,37 @@ def make_resume(entries):
 
     # jobs (75 apart from each job)
     c0 = entries['Company0'].get()
+    c1 = entries['Company1'].get()
+    c2 = entries['Company2'].get()
     j0 = entries['Job0'].get()
-    city = CITY
+    j1 = entries['Job1'].get()
+    j2 = entries['Job2'].get()
+    city0 = entries['City0'].get()
+    city1 = entries['City1'].get()
+
     state = STATE
     start = START
     end = END
-    location = city + ", " + state
+    location = city0 + ", " + state
     date = start + " - " + end
     doc.list_exp(c0, j0, location, date,
                  x_left=SUB_HEADER_POS, x_right=LOC_POS, y=LINE_END - (75 * 0),  # 75 apart
                  bullets=exp)
 
-    c1 = entries['Company1'].get()
-    j1 = entries['Job1'].get()
-    city = CITY
     state = STATE
     start = START
     end = END
-    location = city + ", " + state
+    location = city1 + ", " + state
     date = start + " - " + end
     doc.list_exp(c1, j1, location, date,
                  x_left=SUB_HEADER_POS, x_right=LOC_POS, y=LINE_END - (75 * 1),  # 75 apart
                  bullets=exp)
 
-    c2 = entries['Company2'].get()
-    j2 = entries['Job2'].get()
-    city = CITY
+    city2 = entries['City2'].get()
     state = STATE
     start = START
     end = END
-    location = city + ", " + state
+    location = city2 + ", " + state
     date = start + " - " + end
     doc.list_exp(c2, j2, location, date,
                  x_left=SUB_HEADER_POS, x_right=LOC_POS, y=LINE_END - (75 * 2),  # 75 apart
