@@ -14,6 +14,15 @@ FILE_TITLE = "sample_gui.pdf"
 DOC_TITLE = "Sample"
 
 
+def read_file(file_name):
+    file = open(file_name, 'r')
+    ret = []
+    for text in file:
+        ret.append(text.rstrip('\n'))
+    file.close()
+    return ret
+
+
 def make_resume(entries):
     # initialize pdf
     doc = ResumeBuilder(FILE_TITLE, DOC_TITLE,
@@ -30,7 +39,10 @@ def make_resume(entries):
 
     # Skills
     doc.section(name="Skills", x=HEADER_POS, y=675, line_start=80, line_end=LINE_END)
-    skills = ["Lorem ipsum dolor sit amet", "Ut enim ad minim veniam", "Duis aute irure dolor in reprehenderit"]
+    skill_values = [["Lorem ipsum dolor sit amet", "Ut enim ad minim veniam", "Duis aute irure dolor in reprehenderit"],
+                    ["spongebob", "squidward", "mr krabs", "patrick"],
+                    ["phil swift", "billy mays"],
+                    ["java", "c++", "python"]]
 
     # 15 apart for skills
     dist = 150  # change to something not too far
@@ -39,11 +51,14 @@ def make_resume(entries):
     word_len = [len(skill_list[0]), len(skill_list[1]), len(skill_list[2]), len(skill_list[3])]
     i = 0
     for skill in skill_list:
-        doc.list_skill(skill, skill_values=skills,
+        doc.list_skill(skill, skill_values[i],
                        x_left=SUB_HEADER_POS, x_right=max(word_len) + dist, y=650 - (15 * i))
         i += 1
 
-    exp = ["Lorem ipsum dolor sit amet", "Ut enim ad minim veniam", "Duis aute irure dolor in reprehenderit"]
+    exp = [["Lorem ipsum dolor sit amet", "Ut enim ad minim veniam", "Duis aute irure dolor in reprehenderit"],
+                    ["spongebob", "squidward", "mr krabs", "patrick"],
+                    ["phil swift", "billy mays"],
+                    ["java", "c++", "python"]]
     # Experience
     doc.section(name="Experience", x=HEADER_POS, y=575, line_start=130, line_end=LINE_END)
 
@@ -60,16 +75,19 @@ def make_resume(entries):
         date = start[i] + " - " + end[i]
         doc.list_exp(companies[i], jobs[i], location, date,
                      x_left=SUB_HEADER_POS, x_right=LOC_POS, y=LINE_END - (75 * i),  # 75 apart
-                     bullets=exp)
+                     bullets=exp[i])
 
-    proj = ["Lorem ipsum dolor sit amet", "Ut enim ad minim veniam", "Duis aute irure dolor in reprehenderit"]
+    proj = [["Lorem ipsum dolor sit amet", "Ut enim ad minim veniam", "Duis aute irure dolor in reprehenderit"],
+                    ["spongebob", "squidward", "mr krabs", "patrick"],
+                    ["phil swift", "billy mays"],
+                    ["java", "c++", "python"]]
     # Projects
     doc.section(name="Projects", x=HEADER_POS, y=325, line_start=100, line_end=LINE_END)
     projects = [entries['Project0'].get(), entries['Project1'].get(), entries['Project2'].get()]
     # 75 apart
     for i in range(3):
         name = projects[i]
-        doc.list_project(name, x=SUB_HEADER_POS, y=300 - 75 * i, bullets=proj)
+        doc.list_project(name, x=SUB_HEADER_POS, y=300 - 75 * i, bullets=proj[i])
 
     # Education
     doc.section(name="Education", x=HEADER_POS, y=75, line_start=120, line_end=LINE_END)
