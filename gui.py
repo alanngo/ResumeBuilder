@@ -13,14 +13,6 @@ attr = ('Name', 'Email', 'Phone Number',
 FILE_TITLE = "sample_gui.pdf"
 DOC_TITLE = "Sample"
 
-CITY = "San Francisco"
-STATE = "California"
-START = "December 2001"
-END = "Present"
-SCHOOL = "University of California at Berkley"
-DEGREE = "Bachelor's Degree in Marketing"
-PROJECT = "Flex Glue Clear"
-
 
 def make_resume(entries):
     # initialize pdf
@@ -109,7 +101,7 @@ def make_form(root, fields):
         lab = Label(row, width=22, text=field + ": ", anchor='w')
         ent = Entry(row)
         ent.insert(0, "Lorem ipsum ")
-        row.pack(side=TOP, fill=X, padx=5, pady=4)
+        row.pack(side=TOP, fill=X, padx=5, pady=1)
         lab.pack(side=LEFT)
         ent.pack(side=LEFT, expand=NO, fill=X)
         entries[field] = ent
@@ -122,7 +114,7 @@ def main():
     root.bind('<Return>', (lambda event, e=None: fetch(e)))
     submit = Button(root, text='Make Resume',
                     command=(lambda e=ents: make_resume(e)))
-    submit.pack(side=RIGHT, padx=5, pady=5)
+    submit.pack(side=BOTTOM, padx=5, pady=5)
     root.mainloop()
 
 
