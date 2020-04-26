@@ -8,7 +8,8 @@ attr = ('Name', 'Email', 'Phone Number',
         'Company0', 'Job0', 'City0', 'State0', 'Start0', 'End0',
         'Company1', 'Job1', 'City1', 'State1', 'Start1', 'End1',
         'Company2', 'Job2', 'City2', 'State2', 'Start2', 'End2',
-        'Project0', 'Project1', 'Project2')
+        'Project0', 'Project1', 'Project2',
+        'School', 'Degree', 'Start', 'End', 'City', 'State')
 FILE_TITLE = "sample_gui.pdf"
 DOC_TITLE = "Sample"
 
@@ -80,12 +81,12 @@ def make_resume(entries):
 
     # Education
     doc.section(name="Education", x=HEADER_POS, y=75, line_start=120, line_end=LINE_END)
-    school = SCHOOL
-    degree = DEGREE
-    city = CITY
-    state = STATE
-    start = START
-    end = END
+    school = entries['School'].get()
+    degree = entries['Degree'].get()
+    city = entries['City'].get()
+    state = entries['State'].get()
+    start = entries['Start'].get()
+    end = entries['End'].get()
     location = city + ", " + state
     date = start + " - " + end
     doc.list_edu(school, degree, location, date,
@@ -107,10 +108,10 @@ def make_form(root, fields):
         row = Frame(root)
         lab = Label(row, width=22, text=field + ": ", anchor='w')
         ent = Entry(row)
-        ent.insert(0, "0")
-        row.pack(side=TOP, fill=X, padx=5, pady=5)
+        ent.insert(0, "Lorem ipsum ")
+        row.pack(side=TOP, fill=X, padx=5, pady=4)
         lab.pack(side=LEFT)
-        ent.pack(side=RIGHT, expand=YES, fill=X)
+        ent.pack(side=LEFT, expand=NO, fill=X)
         entries[field] = ent
     return entries
 
