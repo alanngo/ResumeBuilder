@@ -4,7 +4,7 @@ from Color import *
 from ResumeBuilder import ResumeBuilder
 
 attr = ('Name', 'Email', 'Phone Number',
-        'Skill0', 'Skill1', 'Skill2', 'Skill3',
+        'Skillset0', 'Skillset1', 'Skillset2', 'Skillset3',
         'Company0', 'Job0', 'City0', 'State0', 'Start0', 'End0',
         'Company1', 'Job1', 'City1', 'State1', 'Start1', 'End1',
         'Company2', 'Job2', 'City2', 'State2', 'Start2', 'End2',
@@ -47,7 +47,10 @@ def make_resume(entries):
     # 15 apart for skills
     dist = 150  # change to something not too far
 
-    skill_list = [entries['Skill0'].get(), entries['Skill1'].get(), entries['Skill2'].get(), entries['Skill3'].get()]
+    skill_list = [entries['Skillset0'].get(),
+                  entries['Skillset1'].get(),
+                  entries['Skillset2'].get(),
+                  entries['Skillset3'].get()]
     word_len = [len(skill_list[0]), len(skill_list[1]), len(skill_list[2]), len(skill_list[3])]
     i = 0
     for skill in skill_list:
@@ -56,9 +59,9 @@ def make_resume(entries):
         i += 1
 
     exp = [["Lorem ipsum dolor sit amet", "Ut enim ad minim veniam", "Duis aute irure dolor in reprehenderit"],
-                    ["spongebob", "squidward", "mr krabs", "patrick"],
-                    ["phil swift", "billy mays"],
-                    ["java", "c++", "python"]]
+           ["spongebob", "squidward", "mr krabs", "patrick"],
+           ["phil swift", "billy mays"],
+           ["java", "c++", "python"]]
     # Experience
     doc.section(name="Experience", x=HEADER_POS, y=575, line_start=130, line_end=LINE_END)
 
@@ -78,9 +81,9 @@ def make_resume(entries):
                      bullets=exp[i])
 
     proj = [["Lorem ipsum dolor sit amet", "Ut enim ad minim veniam", "Duis aute irure dolor in reprehenderit"],
-                    ["spongebob", "squidward", "mr krabs", "patrick"],
-                    ["phil swift", "billy mays"],
-                    ["java", "c++", "python"]]
+            ["spongebob", "squidward", "mr krabs", "patrick"],
+            ["phil swift", "billy mays"],
+            ["java", "c++", "python"]]
     # Projects
     doc.section(name="Projects", x=HEADER_POS, y=325, line_start=100, line_end=LINE_END)
     projects = [entries['Project0'].get(), entries['Project1'].get(), entries['Project2'].get()]
@@ -118,10 +121,13 @@ def make_form(root, fields):
         row = Frame(root)
         lab = Label(row, width=22, text=field + ": ", anchor='w')
         ent = Entry(row)
+
         ent.insert(0, "Lorem ipsum ")
+
         row.pack(side=TOP, fill=X, padx=5, pady=1)
         lab.pack(side=LEFT)
         ent.pack(side=LEFT, expand=NO, fill=X)
+
         entries[field] = ent
     return entries
 
@@ -130,8 +136,7 @@ def main():
     root = Tk()
     ents = make_form(root, attr)
     root.bind('<Return>', (lambda event, e=None: fetch(e)))
-    submit = Button(root, text='Make Resume',
-                    command=(lambda e=ents: make_resume(e)))
+    submit = Button(root, text='Make Resume', command=(lambda e=ents: make_resume(e)))
     submit.pack(side=BOTTOM, padx=5, pady=5)
     root.mainloop()
 
