@@ -1,17 +1,17 @@
 from tkinter import *
 from Paper import *
 from Color import *
+from Fields import *
 from ResumeBuilder import ResumeBuilder
 
-attr = ('Name', 'Email', 'Phone Number',
-        'Skillset0', 'Skillset1', 'Skillset2', 'Skillset3',
-        'Company0', 'Job0', 'City0', 'State0', 'Start0', 'End0',
-        'Company1', 'Job1', 'City1', 'State1', 'Start1', 'End1',
-        'Company2', 'Job2', 'City2', 'State2', 'Start2', 'End2',
-        'Project0', 'Project1', 'Project2',
-        'School', 'Degree', 'Start', 'End', 'City', 'State')
 FILE_TITLE = "sample_gui.pdf"
 DOC_TITLE = "Sample"
+
+
+def create_file(file_name, text):
+    file = open(file_name, 'w')
+    file.write(text)
+    file.close()
 
 
 def read_file(file_name):
@@ -39,10 +39,10 @@ def make_resume(entries):
 
     # Skills
     doc.section(name="Skills", x=HEADER_POS, y=675, line_start=80, line_end=LINE_END)
-    skill_values = [["Lorem ipsum dolor sit amet", "Ut enim ad minim veniam", "Duis aute irure dolor in reprehenderit"],
-                    ["spongebob", "squidward", "mr krabs", "patrick"],
-                    ["phil swift", "billy mays"],
-                    ["java", "c++", "python"]]
+    skill_values = [read_file("skills0.txt"),
+                    read_file("skills1.txt"),
+                    read_file("skills2.txt"),
+                    read_file("skills3.txt")]
 
     # 15 apart for skills
     dist = 150  # change to something not too far
@@ -58,10 +58,9 @@ def make_resume(entries):
                        x_left=SUB_HEADER_POS, x_right=max(word_len) + dist, y=650 - (15 * i))
         i += 1
 
-    exp = [["Lorem ipsum dolor sit amet", "Ut enim ad minim veniam", "Duis aute irure dolor in reprehenderit"],
-           ["spongebob", "squidward", "mr krabs", "patrick"],
-           ["phil swift", "billy mays"],
-           ["java", "c++", "python"]]
+    exp = [read_file("job0.txt"),
+           read_file("job1.txt"),
+           read_file("job2.txt")]
     # Experience
     doc.section(name="Experience", x=HEADER_POS, y=575, line_start=130, line_end=LINE_END)
 
@@ -80,10 +79,9 @@ def make_resume(entries):
                      x_left=SUB_HEADER_POS, x_right=LOC_POS, y=LINE_END - (75 * i),  # 75 apart
                      bullets=exp[i])
 
-    proj = [["Lorem ipsum dolor sit amet", "Ut enim ad minim veniam", "Duis aute irure dolor in reprehenderit"],
-            ["spongebob", "squidward", "mr krabs", "patrick"],
-            ["phil swift", "billy mays"],
-            ["java", "c++", "python"]]
+    proj = [read_file("project0.txt"),
+            read_file("project1.txt"),
+            read_file("project2.txt")]
     # Projects
     doc.section(name="Projects", x=HEADER_POS, y=325, line_start=100, line_end=LINE_END)
     projects = [entries['Project0'].get(), entries['Project1'].get(), entries['Project2'].get()]
@@ -133,6 +131,14 @@ def make_form(root, fields):
 
 
 def main():
+    # creating dummy files to list skills, project, and job details
+    for i in range(0, 4):
+        create_file("skills" + str(i)+".txt", "blah" + str(i))
+
+    for i in range(0, 3):
+        create_file("job" + str(i)+".txt", "work" + str(i))
+        create_file("project" + str(i)+".txt", "project" + str(i))
+
     root = Tk()
     ents = make_form(root, attr)
     root.bind('<Return>', (lambda event, e=None: fetch(e)))
