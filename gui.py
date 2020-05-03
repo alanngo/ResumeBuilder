@@ -8,6 +8,8 @@ FILE_TITLE = "sample_gui.pdf"
 DOC_TITLE = "Sample"
 
 
+# creates dummy files for the program
+# to read from
 def create_file(file_name, text):
     file = open(file_name, 'w')
     file.write(text)
@@ -114,6 +116,7 @@ def fetch(entries):
     print(entries)
 
 
+# builds form
 def make_form(root, fields):
     entries = {}
     for field in fields:
@@ -134,11 +137,11 @@ def make_form(root, fields):
 def main():
     # creating dummy files to list skills, project, and job details
     for i in range(0, 4):
-        create_file("skills" + str(i)+".txt", "blah" + str(i))
+        create_file("skills" + str(i) + ".txt", "blah" + str(i))
 
     for i in range(0, 3):
-        create_file("job" + str(i)+".txt", "work" + str(i))
-        create_file("project" + str(i)+".txt", "project" + str(i))
+        create_file("job" + str(i) + ".txt", "work" + str(i))
+        create_file("project" + str(i) + ".txt", "project" + str(i))
 
     root = Tk()
     ents = make_form(root, attr)
