@@ -109,6 +109,7 @@ def make_resume(entries):
     doc.save()
 
 
+# placeholder for bind function
 def fetch(entries):
     print(entries)
 
