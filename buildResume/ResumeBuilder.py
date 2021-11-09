@@ -1,6 +1,6 @@
 from reportlab.pdfgen import canvas
-from Fonts import *
-from Color import set_color
+from buildResume.Fonts import *
+from buildResume.Color import set_color
 
 
 class ResumeBuilder:

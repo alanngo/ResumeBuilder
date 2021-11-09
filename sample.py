@@ -1,6 +1,6 @@
-from ResumeBuilder import ResumeBuilder
-from Paper import *
-from Color import *
+from buildResume.ResumeBuilder import ResumeBuilder
+from buildResume.Paper import *
+from buildResume.Color import *
 
 FILE_TITLE = "sample.pdf"
 DOC_TITLE = "Sample"
