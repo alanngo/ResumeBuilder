@@ -5,7 +5,12 @@ from buildResume.Color import set_color
 
 class ResumeBuilder:
 
-    def __init__(self, file_title, doc_title, header_color, category_color, list_color):
+    def __init__(self,
+     header_color, 
+     category_color, 
+     list_color, 
+     file_title="sampleRes.pdf", 
+     doc_title ="Sample",):
         self.pdf = canvas.Canvas(file_title)
         self.pdf.setTitle(doc_title)
         self.header_color = header_color
